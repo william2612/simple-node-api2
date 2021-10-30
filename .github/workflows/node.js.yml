@@ -21,7 +21,23 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
- 
+     name: Node.js CI/CD ## <-- it’s not just CI anymore
+
+## <-- don’t change anything in this section
+
+jobs:
+  build:
+    ## don’t change anything in this section
+  deploy: ## <-- this is the new stuff
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "teste54321"
+          heroku_email: "william8fir@hotmail.com"
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
